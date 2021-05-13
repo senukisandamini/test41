@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR.js demo</title>
+    <script src='https://aframe.io/releases/0.9.2/aframe.min.js'></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script src='https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js'></script>
+       <script src='https://unpkg.com/aframe-animation-component@^4.0.0/dist/aframe-animation-component.min.js'></script>
+
+    <script>
+        THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
+    <script src="./script.js"></script>
+    <script src="./TextGeometry.js"></script>
+    <script type="./aframe.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css"/>
+   
+</head>
+ <script type="text/javascript">
+    const loader = new THREE.FontLoader();
+
+loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+
+    const geometry = new THREE.TextGeometry( 'Hello three.js!', {
+        font: font,
+        size: 80,
+        height: 5,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 10,
+        bevelSize: 8,
+        bevelOffset: 0,
+        rotation: 45 90 180,
+        bevelSegments: 5
+    } );
+} );
+</script>
+<body style='margin: 0; overflow: hidden;'>
+    <div class="centered instructions"></div>
+    <a-scene 
+        vr-mode-ui='enabled: false' 
+        embedded
+        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+
+    <!-- <a-text value="hello" negate="false" scale="2 2 1" position="-2 2 -4"></a-text> -->
+
+    <a-camera gps-camera rotation-reader>
+        <a-cursor></a-cursor>
+    </a-camera>
+       
+    <!--  <a-entity
+  geometry="primitive: plane; width: 4; height: auto"
+  material="color: blue"
+  text="value: This text will be 4 units wide."></a-entity>  -->
+
+  <a-assets>
+        <a-asset-item id="optimerBoldFont" src="https://rawgit.com/mrdoob/three.js/dev/examples/fonts/optimer_bold.typeface.json"></a-asset-item>
+        <a-mixin id="boldFont" text="font: #optimerBoldFont"></a-mixin>
+      </a-assets>
+ 
+     <a-entity position="0 1 -1" scale="1 1 1" text="value: Hi, Hello World ; color: #212121; align:center; wrapCount: 15"
+geometry="primitive: plane; width: auto; height: auto"
+material="color:#DDDDDD; shader:flat; visible:true"
+event-set__enter="_event:mouseenter; text.color: blue"
+event-set__enter="_event:mouseleave; text.color: red">
+    </a-entity>
+<a-box color ="red" position="0 0.5 -4"></a-box>
+</a-scene>
+
+<div class="centered">
+    <button data-action="change"></button>
+</div>
+</body>
